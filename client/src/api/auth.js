@@ -1,0 +1,19 @@
+export const setAuthToken = (user) => {
+  const currentUser = {
+    email: user.email,
+  };
+
+  //sev user in db and grt token
+  fetch(`http://localhost:8000/user/${user?.email}`, {
+    method: "PUT",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(currentUser),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      localStorage.setItem("aircnc-token", data.token);
+    });
+
+    console.log('call');
+};
